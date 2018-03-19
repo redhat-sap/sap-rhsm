@@ -1,0 +1,31 @@
+---
+# defaults file for subscribe-rhn
+#
+# satellite_server: FQDN
+#
+# You can set the following variables to subscribe to RHN
+# 
+# Option 1:
+#  reg_activation_key: 
+#  reg_organization_id:
+#
+# Option 2: 
+#    reg_pool: 
+#    reg_pool_ids: 
+#    reg_username: 
+#    reg_password: 
+#
+# The following are optional
+#    reg_server_insecure: defaults to no
+#    reg_autosubscribe: defaults to yes 
+#    reg_osrelease: default unset, can set to 7Server, 7.2, 7.3 etc 
+#
+
+# Set this variable to true if you want to remove/disable all previously existing repositories. The default is false
+repo_reset: true
+
+# Use this to define the list of repositories you want to subscribe to
+
+repositories:
+   - rhel-{{ ansible_distribution_major_version }}-server-rpms
+

@@ -1,0 +1,71 @@
+---
+
+- name: Check Subscription Status
+  shell: LANG=C subscription-manager list | awk  ' ( $1 == "Status:" ) { print $2 } ' | sort -u
+  register: subscription_status
+  changed_when: false
+
+- name: make sure registration credentials are provided
+  fail:
+    msg: "please provide registration credentials for this system"
+  when: ( subscription_status.stdout != "Subscribed" ) and (((reg_activation_key is not defined) or (reg_organization_id is not defined)) or ((reg_username is not defined ) or (reg_password is not defined)))
+
+- name: Ensure credentials are installed for Satellite 6 server  "{{ satellite_server }}"
+  yum:
+    name: "{{ 'https://' +  satellite_server +'/pub/katello-ca-consumer-latest.noarch.rpm' }}"
+    state: present
+    validate_certs: no
+  when: not( (satellite_server is undefined) or (satellite_server is none) or (satellite_server | trim == '') )
+
+- name: ensure system is registered using known activation key
+  redhat_subscription:
+    activationkey: "{{ reg_activation_key | default(omit) }}"
+    org_id: "{{ reg_organization_id | default(omit)}}"
+    pool: "{{ reg_pool | default(omit) }}"
+    pool_ids: "{{ reg_pool_ids | default(omit) }}"
+    server_insecure: "{{ reg_server_insecure | default('no') }}"
+    autosubscribe: "{{ reg_autosubscribe | default('yes') }}"
+    username: "{{ reg_username | default(omit) }}"
+    password: "{{ reg_password | default(omit) }}"
+    state: present
+  when: ( subscription_status.stdout != "Subscribed" )
+
+- name: Reset all previous repositories
+  shell: |
+    subscription-manager repos --disable="*"
+    num=0
+    for r in /etc/yum.repos.d/*.repo; do
+      num=$(( num + $(grep  -c "^enabled.*=.*1$" $r) ))
+      sed -i 's/^enabled.*=.*1/enabled = 0/g' $r
+    done
+    echo "$num"
+  register: repo_cleanup
+  changed_when: repo_cleanup.stdout > 0
+  failed_when: repo_cleanup.rc > 0
+  when: repo_reset
+
+- name: Set fix osrelease to "{{ reg_osrelease }}"
+  shell: | 
+    if [ "$( LANG=C subscription-manager release | cut -d' ' -f2 )" != "{{ reg_osrelease }}" ]; then
+          subscription-manager release --set={{ reg_osrelease }} 
+    else 
+          exit 90
+    fi 
+  register: rh_release
+  changed_when: rh_release.rc == 0
+  failed_when: rh_release.rc > 0 and rh_release.rc !=90
+  when: not( (reg_osrelease is undefined) or (reg_osrelease is none) or (reg_osrelease | trim == '') )
+  
+# TODO: Change functionality to use yum module
+- name: check repositories system has access to
+  shell: yum repolist warn=no
+  register: repolist
+  changed_when: false
+
+
+- name: ensure system has access to the right repos
+  shell: "subscription-manager repos --enable={{ item }}"
+  with_items: "{{ repositories }}"
+  when: "repolist.stdout.find('{{ item }}') == -1"
+
+...
