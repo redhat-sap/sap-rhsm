@@ -8,7 +8,7 @@
 - name: make sure registration credentials are provided
   fail:
     msg: "please provide registration credentials for this system"
-  when: ( subscription_status.stdout != "Subscribed" ) and (((reg_activation_key is not defined) or (reg_organization_id is not defined)) or ((reg_username is not defined ) or (reg_password is not defined)))
+  when: ( subscription_status.stdout != "Subscribed" ) and ( ((reg_activation_key is not defined) or (reg_organization_id is not defined)) and ((reg_username is not defined ) or (reg_password is not defined)) )
 
 - name: Ensure credentials are installed for Satellite 6 server  "{{ satellite_server }}"
   yum:
