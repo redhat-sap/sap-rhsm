@@ -8,7 +8,7 @@ galaxy_info:
   - name: EL
     versions: [ 6, 7 ]
 
-  galaxy_tags: [ 'system', 'subscription-manager', 'beta' ]
+  galaxy_tags: [ 'system', 'subscription\-manager', 'beta' ]
 
 dependencies: []
   # List your role dependencies here, one per line. Be sure to remove the '[]' above,

@@ -37,6 +37,7 @@
     for r in /etc/yum.repos.d/*.repo; do
       num=$(( num + $(grep  -c "^enabled.*=.*1$" $r) ))
       sed -i 's/^enabled.*=.*1/enabled = 0/g' $r
+      # maybe better remove ...
     done
     echo "$num"
   register: repo_cleanup
