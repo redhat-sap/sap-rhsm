@@ -17,12 +17,12 @@
 #
 # The following are optional
 #    reg_server_insecure: defaults to no
-#    reg_autosubscribe: defaults to yes 
+#    reg_autosubscribe: defaults to unset 
 #    reg_osrelease: default unset, can set to 7Server, 7.2, 7.3 etc 
 #
 
 # Set this variable to true if you want to remove/disable all previously existing repositories. The default is false
-repo_reset: true
+repo_reset: false
 
 # Use this to define the list of repositories you want to subscribe to
 
