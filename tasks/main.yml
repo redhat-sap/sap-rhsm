@@ -24,7 +24,7 @@
     pool: "{{ reg_pool | default(omit) }}"
     pool_ids: "{{ reg_pool_ids | default(omit) }}"
     server_insecure: "{{ reg_server_insecure | default('no') }}"
-    autosubscribe: "{{ reg_autosubscribe | default('yes') }}"
+    autosubscribe: "{{ reg_autosubscribe | default(omit) }}"
     username: "{{ reg_username | default(omit) }}"
     password: "{{ reg_password | default(omit) }}"
     state: present
