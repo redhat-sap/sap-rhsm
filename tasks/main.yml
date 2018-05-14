@@ -51,6 +51,8 @@
           yum clean all
           subscription-manager release --set={{ reg_osrelease }} 
           yum clean all
+          # workaround to update redhat.repo appropriately
+          subscription-manager repos --list 
     else 
           exit 90
     fi 
