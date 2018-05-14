@@ -48,7 +48,9 @@
 - name: Set fix osrelease to "{{ reg_osrelease }}"
   shell: | 
     if [ "$( LANG=C subscription-manager release | cut -d' ' -f2 )" != "{{ reg_osrelease }}" ]; then
+          yum clean all
           subscription-manager release --set={{ reg_osrelease }} 
+          yum clean all
     else 
           exit 90
     fi 
