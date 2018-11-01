@@ -31,4 +31,3 @@ repo_reset: false
 
 repositories:
    - rhel-{{ ansible_distribution_major_version }}-server-rpms
-
