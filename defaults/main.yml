@@ -15,11 +15,14 @@
 #    reg_username: 
 #    reg_password: 
 #
-# The following are optional
+# The following are optional, so undefined is ok
 #    reg_server_insecure: defaults to no
 #    reg_autosubscribe: defaults to unset 
 #    reg_osrelease: default unset, can set to 7Server, 7.2, 7.3 etc 
-#
+#    reg_server_proxy_hostname
+#    reg_server_proxy_port
+#    reg_server_proxy_user
+#    reg_server_proxy_password
 
 # Set this variable to true if you want to remove/disable all previously existing repositories. The default is false
 repo_reset: false

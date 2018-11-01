@@ -27,6 +27,10 @@
     autosubscribe: "{{ reg_autosubscribe | default(omit) }}"
     username: "{{ reg_username | default(omit) }}"
     password: "{{ reg_password | default(omit) }}"
+    server_proxy_hostname: "{{ reg_server_proxy_hostname | default(omit) }}"
+    server_proxy_port: "{{ reg_server_proxy_port | default(omit) }}"
+    server_proxy_user: "{{ reg_server_proxy_user | default(omit) }}"
+    server_proxy_password: "{{ reg_server_proxy_password | default(omit) }}"
     state: present
   when: ( subscription_status.stdout != "Subscribed" )
 
@@ -46,21 +50,21 @@
   when: repo_reset
 
 - name: Set fix osrelease to "{{ reg_osrelease }}"
-  shell: | 
+  shell: |
     if [ "$( LANG=C subscription-manager release | cut -d' ' -f2 )" != "{{ reg_osrelease }}" ]; then
           yum clean all
-          subscription-manager release --set={{ reg_osrelease }} 
+          subscription-manager release --set={{ reg_osrelease }}
           yum clean all
           # workaround to update redhat.repo appropriately
-          subscription-manager repos --list 
-    else 
+          subscription-manager repos --list
+    else
           exit 90
-    fi 
+    fi
   register: rh_release
   changed_when: rh_release.rc == 0
   failed_when: rh_release.rc > 0 and rh_release.rc !=90
   when: not( (reg_osrelease is undefined) or (reg_osrelease is none) or (reg_osrelease | trim == '') )
-  
+
 # TODO: Change functionality to use yum module
 - name: check repositories system has access to
   shell: yum repolist warn=no
