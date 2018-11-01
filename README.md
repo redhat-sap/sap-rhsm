@@ -34,6 +34,11 @@ The following are optional:
     reg_server_insecure: defaults to no
     reg_autosubscribe: defaults to unset
     reg_osrelease: default unset, can set to 7Server, 7.2, 7.3 etc
+    reg_server_proxy_hostname:  HTTP proxy hostname
+    reg_server_proxy_port: HTTP proxy port
+    reg_server_proxy_user: user for HTTP proxy with basic authentication
+    reg_server_proxy_password: password for HTTP proxy with basic authentication
+
 
 Set this variable to true if you want to remove/disable all previously existing repositories. The default is false
 
