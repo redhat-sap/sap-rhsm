@@ -12,7 +12,7 @@
 
 - name: Ensure credentials are installed for Satellite 6 server  "{{ satellite_server }}"
   yum:
-    name: "{{ 'https://' +  satellite_server +'/pub/katello-ca-consumer-latest.noarch.rpm' }}"
+    name: "{{ 'http://' +  satellite_server +'/pub/katello-ca-consumer-latest.noarch.rpm' }}"
     state: present
     validate_certs: no
   when: not( (satellite_server is undefined) or (satellite_server is none) or (satellite_server | trim == '') )
