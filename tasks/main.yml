@@ -20,7 +20,7 @@
 - name: ensure system is registered using known activation key
   redhat_subscription:
     activationkey: "{{ reg_activation_key | default(omit) }}"
-    org_id: "{{ reg_organization_id | default(omit)}}"
+    org_id: "{{ reg_organization_id | default(omit) }}"
     pool: "{{ reg_pool | default(omit) }}"
     pool_ids: "{{ reg_pool_ids | default(omit) }}"
     server_insecure: "{{ reg_server_insecure | default('no') }}"
@@ -48,13 +48,18 @@
   register: rh_release
   changed_when: rh_release.rc == 0
   failed_when: rh_release.rc > 0 and rh_release.rc !=90
-  when: 
+  when:
     - not( (reg_osrelease is undefined) or (reg_osrelease is none) or (reg_osrelease | trim == '') )
 
-- name: 'repository setup for ansible >= 2.5'
+- name: 'Disable all repositories except the required'
+  rhsm_repository:
+    name: "*"
+    state: disabled
+  when: repo_reset
+
+- name: 'repository setup'
   rhsm_repository:
     name: "{{ repositories }}"
-    purge: "{{ repo_reset }}"
     state: enabled
 
 ...
