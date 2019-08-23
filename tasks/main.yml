@@ -34,7 +34,6 @@
     state: present
   when: ( subscription_status.stdout != "Subscribed" )
 
-
 - name: Set fix osrelease to "{{ reg_osrelease }}"
   shell: |
     if [ "$( LANG=C subscription-manager release | cut -d' ' -f2 )" != "{{ reg_osrelease }}" ]; then
@@ -51,56 +50,11 @@
   failed_when: rh_release.rc > 0 and rh_release.rc !=90
   when: 
     - not( (reg_osrelease is undefined) or (reg_osrelease is none) or (reg_osrelease | trim == '') )
-    - ansible_version.major == 2 
-    - ansible_version.minor <= 7
-
-- name: Set fix osrelease to "{{ reg_osrelease }}"
-  rhsm_release:
-      release:  "{{ reg_osrelease }}"
-  when: 
-    - not( (reg_osrelease is undefined) or (reg_osrelease is none) or (reg_osrelease | trim == '') )
-    - ansible_version.major == 2 
-    - ansible_version.minor >= 8
-
-
-- name: 'run repository setup for ansible <= 2.4'
-  block:
-  - name: Reset all previous repositories
-    shell: |
-      subscription-manager repos --disable="*"
-      num=0
-      for r in /etc/yum.repos.d/*.repo; do
-        num=$(( num + $(grep  -c "^enabled.*=.*1$" $r) ))
-        sed -i 's/^enabled.*=.*1/enabled = 0/g' $r
-        # maybe better remove ...
-      done
-      echo "$num"
-    register: repo_cleanup
-    changed_when: repo_cleanup.stdout > 0
-    failed_when: repo_cleanup.rc > 0
-    when: repo_reset
-
-  - name: check repositories system has access to
-    shell: yum repolist warn=no
-    register: repolist
-    changed_when: false
-
-  - name: ensure system has access to the right repos
-    shell: "subscription-manager repos --enable={{ item }}"
-    with_items: "{{ repositories }}"
-    when: "repolist.stdout.find('{{ item }}') == -1"
-
-  when: 
-    - ansible_version.major == 2 
-    - ansible_version.minor <= 4
 
 - name: 'repository setup for ansible >= 2.5'
   rhsm_repository:
     name: "{{ repositories }}"
     purge: "{{ repo_reset }}"
     state: enabled
-  when: 
-    - ansible_version.major == 2 
-    - ansible_version.minor >= 5
 
 ...
