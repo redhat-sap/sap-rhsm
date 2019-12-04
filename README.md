@@ -1,4 +1,4 @@
-# sap-rhsm
+# sap-rhsm [![Build Status](https://travis-ci.com/redhat-sap/sap-rhsm.svg?branch=master)](https://travis-ci.com/redhat-sap/sap-rhsm)
 
 This role configures Red Hat Subscriptions for RHEL 8 to enable SAP Solutions to be installed on the target system(s).
 
