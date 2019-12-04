@@ -2,8 +2,6 @@
 
 This role configures Red Hat Subscriptions for RHEL 8 to enable SAP Solutions to be installed on the target system(s).
 
-Additionally will install base required packages in order to deploy SAP Solutions on top of RHEL.
-
 ## Requirements
 
 A valid Red Hat subscription, either directly with redhat.com or through the use of Red Hat Satellite

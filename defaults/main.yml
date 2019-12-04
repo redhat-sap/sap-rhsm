@@ -5,8 +5,4 @@ rhsm_repos:
    - "rhel-8-for-x86_64-sap-solutions-rpms"
    - "ansible-2-for-rhel-8-x86_64-rpms"
 
-list_of_packages_to_install:
- - "ansible"
- - "rhel-system-roles-sap"
-
 register_insights: true
