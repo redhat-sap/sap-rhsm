@@ -73,6 +73,13 @@
     - repos_params is defined
     - repos_params|trim != ''
 
+  - name: 'Install additional Software packages/tools'
+    package:
+      name: '{{ item }}'
+      state: installed
+    with_items:
+    - "{{ list_of_packages_to_install | default([]) }}"
+
   - name: "Register the system to Red Hat Insights"
     command: "insights-client --register"
     when:
