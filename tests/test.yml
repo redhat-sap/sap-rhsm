@@ -1,0 +1,6 @@
+---
+
+- name: Testing SAP RHSM Role
+  hosts: sap-servers
+  roles:
+  - role: sap-rhsm
