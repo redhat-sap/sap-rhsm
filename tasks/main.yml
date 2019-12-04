@@ -27,7 +27,7 @@
       warn: False
     when:
     - rhsm_server_hostname is defined
-    - rhsm_server_hostname|trim != ''
+    - rhsm_server_hostname | length > 0
 
   - name: 'Register system using Red Hat Subscription Manager'
     redhat_subscription:
@@ -71,7 +71,7 @@
     command: "subscription-manager repos {{ repos_params }}"
     when:
     - repos_params is defined
-    - repos_params|trim != ''
+    - repos_params | length > 0
 
   - name: "Register the system to Red Hat Insights"
     command: "insights-client --register"
