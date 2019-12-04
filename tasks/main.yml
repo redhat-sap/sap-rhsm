@@ -83,8 +83,8 @@
   - name: "Register the system to Red Hat Insights"
     command: "insights-client --register"
     when:
-    - repos_params is defined
-    - repos_params|trim != ''
+    - register_insights is defined
+    - register_insights
 
   # End of outer block for "become: True"
   become: True
