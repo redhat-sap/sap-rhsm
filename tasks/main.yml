@@ -43,11 +43,14 @@
 
 - name: 'Ensure RHEL minor release is locked to SAP certified release'
   command: 'subscription-manager release --set={{ ansible_distribution_version }}'
+  register: rhsm_lock
+  changed_when: "'Release set to' in rhsm_lock.stdout"
 
 - name: "Obtain currently enabled repos"
-  shell: 'subscription-manager repos --list-enabled | sed -ne "s/^Repo ID:[^a-zA-Z0-9]*\(.*\)/\1/p"'
+  shell: 'set -o pipefail && subscription-manager repos --list-enabled | sed -ne "s/^Repo ID:[^a-zA-Z0-9]*\(.*\)/\1/p"'
   register: enabled_repos
   check_mode: false  # aka run_always: true, makes sure next task doesn't unduly fail in check mode
+  changed_when: "'Dummy check for passing lint, just a query, nothing changes' in enabled_repos.stdout"
 
 # Build the list of repos to disable/enable before calling 'subscription-manager' as it's a very
 # expensive command to run and hence better to call just once (especially with a long list of repos)
