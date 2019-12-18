@@ -6,3 +6,6 @@ rhsm_repos:
    - "ansible-2-for-rhel-8-x86_64-rpms"
 
 register_insights: true
+
+# This role must be run as ROOT user
+ansible_become: true
