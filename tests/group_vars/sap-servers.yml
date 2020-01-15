@@ -1,7 +1,7 @@
 ---
 
-rhsm_username: "my_rhsm_user"
-rhsm_password: "my_rhsm_passwd"
-rhsm_pool_ids:
+sap_rhsm_username: "my_rhsm_user"
+sap_rhsm_password: "my_rhsm_passwd"
+sap_rhsm_pool_ids:
   - "my_pool_id_1"
   - "my_pool_id_2"
