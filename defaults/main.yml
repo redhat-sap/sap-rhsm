@@ -3,6 +3,7 @@ sap_rhsm_repos:
    - "rhel-8-for-x86_64-baseos-rpms"
    - "rhel-8-for-x86_64-appstream-rpms"
    - "rhel-8-for-x86_64-sap-solutions-rpms"
+   - "rhel-8-for-x86_64-sap-netweaver-rpms"
    - "ansible-2-for-rhel-8-x86_64-rpms"
 
 sap_rhsm_register_insights: true
