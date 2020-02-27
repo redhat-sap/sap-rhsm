@@ -40,6 +40,8 @@
     server_proxy_user: "{{ sap_rhsm_proxy_user | default(omit) }}"
     server_proxy_password: "{{ sap_rhsm_proxy_password | default(omit) }}"
     force_register: "{{ sap_rhsm_force_register | default(omit) }}"
+  when: (sap_rhsm_username is defined and sap_rhsm_password is defined) or
+        (activationkey is defined and org_id is defined)
 
 - name: 'Ensure RHEL minor release is locked to SAP certified release'
   command: 'subscription-manager release --set={{ ansible_distribution_version }}'
