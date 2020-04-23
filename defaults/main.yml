@@ -1,9 +1,18 @@
 ---
-sap_rhsm_repos:
+sap_rhsm_use_e4s: true
+
+sap_rhsm_standard_repos:
    - "rhel-8-for-x86_64-baseos-rpms"
    - "rhel-8-for-x86_64-appstream-rpms"
    - "rhel-8-for-x86_64-sap-solutions-rpms"
    - "rhel-8-for-x86_64-sap-netweaver-rpms"
+   - "ansible-2-for-rhel-8-x86_64-rpms"
+
+sap_rhsm_e4s_repos:
+   - "rhel-8-for-x86_64-baseos-e4s-rpms"
+   - "rhel-8-for-x86_64-appstream-e4s-rpms"
+   - "rhel-8-for-x86_64-sap-solutions-e4s-rpms"
+   - "rhel-8-for-x86_64-sap-netweaver-e4s-rpms"
    - "ansible-2-for-rhel-8-x86_64-rpms"
 
 sap_rhsm_register_insights: true
