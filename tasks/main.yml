@@ -1,8 +1,8 @@
 ---
 # Evaluate whether to use e4s repositories or not
 - name: Ensure 'sap_rhsm_repos' exists and points to the correct repository list
-  set_fact: 
-    sap_rhsm_repos: "{{ (sap_rhsm_use_e4s == true) | ternary(sap_rhsm_e4s_repos, sap_rhsm_standard_repos) }}"
+  set_fact:
+    sap_rhsm_repos: "{{ (sap_rhsm_use_e4s) | ternary(sap_rhsm_e4s_repos, sap_rhsm_standard_repos) }}"
 
 # Need to use the 'command' module for this task since the "redhat_subscription" module
 # won't do a full "clean" when using the "state: absent" option
