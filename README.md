@@ -25,6 +25,7 @@ See `Example Inventory` below for more specific details. At a high level, the fo
 |sap_rhsm_proxy_user|Specify a HTTP proxy user|no|
 |sap_rhsm_proxy_password|Specify a HTTP proxy password|no|
 |sap_rhsm_register_insights|Register the system to Red Hat Insights|no (default true)|
+|sap_rhsm_use_e4s|Whether to use 'e4s' repositories or not|no (default true)|
 
 ## Dependencies
 
