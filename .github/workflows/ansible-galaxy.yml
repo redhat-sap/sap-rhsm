@@ -1,0 +1,20 @@
+name: Ansible Galaxy Import
+
+on: [push]
+
+  branches:    
+      - master
+
+  tags:        
+      - v1.*
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    # Important: This sets up your GITHUB_WORKSPACE environment variable
+    - uses: 0x022b/galaxy-role-import-action@v1
+      with:
+        galaxy_api_key: ${{ secrets.galaxy_api_key }}
