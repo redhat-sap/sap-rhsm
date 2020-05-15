@@ -18,8 +18,6 @@
   when:
   - (sap_rhsm_force_register|default('no'))|lower == 'yes'
 
-  add an error
-
 # Need to use the 'command' module for this task since the "yum" module
 # won't honor an "upgrade" of the RPM in case where the source server changed.
 # - note the 'warn: False' set because of this situation
