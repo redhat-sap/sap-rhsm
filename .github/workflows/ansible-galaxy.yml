@@ -1,11 +1,10 @@
 name: Ansible Galaxy Import
 
-on: [push]
-
-  branches:    
+on: 
+  push:
+    branches:    
       - master
-
-  tags:        
+    tags:        
       - v1.*
 
 jobs:
