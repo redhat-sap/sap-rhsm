@@ -16,8 +16,7 @@ jobs:
       uses: ansible/ansible-lint-action@master
       with:
         targets: |
-          defaults/
-          tasks/
+          ./
         override-deps: |
           ansible==2.9
           ansible-lint==4.2.0
