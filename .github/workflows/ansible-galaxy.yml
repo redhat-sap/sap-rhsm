@@ -8,7 +8,7 @@ on:
       - v1.*
 
 jobs:
-  build:
+  galaxy-sync:
 
     runs-on: ubuntu-latest
 
