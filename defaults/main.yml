@@ -30,6 +30,8 @@ sap_rhsm_e4s_repos_ppc64le:
    - "ansible-2-for-rhel-8-ppc64le-rpms"
 
 sap_rhsm_register_insights: true
+sap_rhsm_register_insights_retries: 10
 
 # This role must be run as ROOT user
 ansible_become: true
+

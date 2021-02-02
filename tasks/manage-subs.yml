@@ -79,7 +79,7 @@
   - repos_params | length > 0
 
 - name: "Register the system to Red Hat Insights"
-  command: "insights-client --register"
+  command: "insights-client --register --retry={{ sap_rhsm_register_insights_retries }}"
   when:
   - sap_rhsm_register_insights is defined
   - sap_rhsm_register_insights
