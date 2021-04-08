@@ -59,7 +59,7 @@ sap_rhsm_password: 'my-password'
 
 ## License
 
-GPLv3
+Apache License 2.0
 
 ## Author Information
 
