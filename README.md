@@ -1,3 +1,5 @@
+# This role is deprecated now and should  be replaced by fedora.linux_system_role.rhc
+
 # sap-rhsm ![Ansible Lint](https://github.com/redhat-sap/sap-rhsm/workflows/Ansible%20Lint/badge.svg?branch=master) ![Ansible Galaxy Import](https://github.com/redhat-sap/sap-rhsm/workflows/Ansible%20Galaxy%20Import/badge.svg?branch=master)
 
 This role configures Red Hat Subscriptions for RHEL 8 to enable SAP Solutions to be installed on the target system(s).
